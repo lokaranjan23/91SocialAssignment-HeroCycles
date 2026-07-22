@@ -7,7 +7,7 @@ public class CreateVariantRequestDto {
 
     private Long bikeConfigId;
 
-    private List<VariantPartRequestDto> partDtos;
+    private List<VariantPartRequestDto> partDto;
 
     public String getName() {
         return name;
@@ -25,11 +25,11 @@ public class CreateVariantRequestDto {
         this.bikeConfigId = bikeConfigId;
     }
 
-    public List<VariantPartRequestDto> getPartDtos() {
-        return partDtos;
+    public List<VariantPartRequestDto> getPartDto() {
+        return partDto;
     }
 
-    public void setPartDtos(List<VariantPartRequestDto> partDtos) {
-        this.partDtos = partDtos;
+    public void setPartDto(List<VariantPartRequestDto> partDto) {
+        this.partDto = partDto;
     }
 }

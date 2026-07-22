@@ -5,7 +5,12 @@ import com.finalProject.enums.VariantStatus;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="variants")
+@Table(name = "variants",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "uk_variant_name_config",
+                        columnNames = {"bike_configuration_id", "name"}
+                )
+        })
 public class Variant {
 
     @Id

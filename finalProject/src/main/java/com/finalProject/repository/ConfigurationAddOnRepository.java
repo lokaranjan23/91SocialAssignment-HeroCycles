@@ -12,4 +12,5 @@ public interface ConfigurationAddOnRepository extends JpaRepository<Configuratio
     List<Long> findByConfigurationId(Long bikeConfigId) ;
 
 
+    boolean existsByConfigurationIdAndAddOnId(Long configId, Long addOnId);
 }

@@ -5,10 +5,7 @@ import com.finalProject.requestDto.BulkUpdatePartRequestDto;
 import com.finalProject.requestDto.CalculateTotalPriceRequestDto;
 import com.finalProject.requestDto.PartRequestDto;
 import com.finalProject.response.ApiResponse;
-import com.finalProject.responseDto.AddonsWithPriceResponseDto;
-import com.finalProject.responseDto.BulkUpdateResponseDto;
-import com.finalProject.responseDto.TotalPriceDto;
-import com.finalProject.responseDto.VariantPriceDto;
+import com.finalProject.responseDto.*;
 import com.finalProject.service.PricingService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,14 +22,13 @@ public class PricingController {
         this.pricingService = pricingService;
     }
 
-    @GetMapping("/calculateTotalPrice")
+    @PostMapping("/calculateTotalPrice")
     public ResponseEntity<ApiResponse<TotalPriceDto>> calculateTotalPrice(
             @RequestBody CalculateTotalPriceRequestDto requestDto){
         TotalPriceDto totalPriceDto =
                 pricingService.calculateTotalPrice(requestDto);
         ApiResponse<TotalPriceDto> response=new ApiResponse<>(
-                "Total price fetched successfully",
-                totalPriceDto);
+                "Total price fetched successfully", totalPriceDto);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
@@ -54,14 +50,9 @@ public class PricingController {
     public ResponseEntity<ApiResponse<BulkUpdateResponseDto>> updatePartPrices(
             @RequestBody BulkUpdatePartRequestDto requestDto) {
 
-        BulkUpdateResponseDto response =
-                pricingService.updatePartPrices(requestDto);
-
-        ApiResponse<BulkUpdateResponseDto> apiResponse =
-                new ApiResponse<>(
-                        "Part prices updated successfully",
-                        response
-                );
+        BulkUpdateResponseDto response = pricingService.updatePartPrices(requestDto);
+        ApiResponse<BulkUpdateResponseDto> apiResponse = new ApiResponse<>(
+                        "Part prices updated successfully", response);
 
         return ResponseEntity.ok(apiResponse);
     }
@@ -70,30 +61,22 @@ public class PricingController {
     public ResponseEntity<ApiResponse<BulkUpdateResponseDto>> updateAddOnPrices(
             @RequestBody BulkUpdateAddOnRequestDto requestDto) {
 
-        BulkUpdateResponseDto response =
-                pricingService.updateAddOnPrices(requestDto);
+        BulkUpdateResponseDto response = pricingService.updateAddOnPrices(requestDto);
 
-        ApiResponse<BulkUpdateResponseDto> apiResponse =
-                new ApiResponse<>(
-                        "Add-on prices updated successfully",
-                        response
-                );
+        ApiResponse<BulkUpdateResponseDto> apiResponse = new ApiResponse<>(
+                        "Add-on prices updated successfully", response);
 
         return ResponseEntity.ok(apiResponse);
     }
 
-    @PostMapping("/bike-configurations/{bikeConfigId}/variants")
+    @GetMapping("/bike-configurations/{bikeConfigId}/variants")
     public ResponseEntity<ApiResponse<List<VariantPriceDto>>> getVariants(
             @PathVariable Long bikeConfigId) {
 
-        List<VariantPriceDto> variants =
-                pricingService.getVariants(bikeConfigId);
+        List<VariantPriceDto> variants = pricingService.getVariants(bikeConfigId);
 
-        ApiResponse<List<VariantPriceDto>> response =
-                new ApiResponse<>(
-                        "Variants fetched successfully",
-                        variants
-                );
+        ApiResponse<List<VariantPriceDto>> response = new ApiResponse<>(
+                        "Variants fetched successfully", variants);
 
         return ResponseEntity.ok(response);
     }
@@ -106,10 +89,31 @@ public class PricingController {
                 pricingService.getValidAddOnsWithPrices(bikeConfigId);
 
         ApiResponse<List<AddonsWithPriceResponseDto>> response =
-                new ApiResponse<>(
-                        "Add-ons fetched successfully",
-                        addOns
-                );
+                new ApiResponse<>("Add-ons fetched successfully", addOns);
+
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/parts")
+    public ResponseEntity<ApiResponse<List<PartResponseDto>>>
+    getAllParts() {
+
+        List<PartResponseDto> result = pricingService.getAllParts();
+
+        ApiResponse<List<PartResponseDto>> response =
+                new ApiResponse<>("Parts fetched successfully", result);
+
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/addons")
+    public ResponseEntity<ApiResponse<List<AddOnDropdownResponseDto>>>
+    getAllAddOns() {
+
+        List<AddOnDropdownResponseDto> result = pricingService.getAllAddOns();
+
+        ApiResponse<List<AddOnDropdownResponseDto>> response =
+                new ApiResponse<>("AddOns fetched successfully", result);
 
         return ResponseEntity.ok(response);
     }

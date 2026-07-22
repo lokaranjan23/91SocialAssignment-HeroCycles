@@ -5,7 +5,8 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "variant_part",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = {"variant_id", "part_id"})
+                @UniqueConstraint(name = "uk_variant_part",
+                        columnNames = {"variant_id", "part_id"})
         })
 public class VariantPart {
 

@@ -1,12 +1,11 @@
 package com.finalProject.service.impl;
 
 import com.finalProject.entity.*;
+import com.finalProject.enums.PartCategory;
+import com.finalProject.enums.VariantStatus;
 import com.finalProject.exception.*;
 import com.finalProject.repository.*;
-import com.finalProject.requestDto.BulkUpdateAddOnRequestDto;
-import com.finalProject.requestDto.BulkUpdatePartRequestDto;
-import com.finalProject.requestDto.CalculateTotalPriceRequestDto;
-import com.finalProject.requestDto.PartRequestDto;
+import com.finalProject.requestDto.*;
 import com.finalProject.responseDto.*;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -46,11 +45,24 @@ public class PricingService implements com.finalProject.service.PricingService {
         Part part= new Part();
         part.setName(requestDto.getPartName());
         part.setCurrentPrice(requestDto.getCurrentPrice());
-        PartCategoryRule category=partCategoryRuleRepository.findById(requestDto.getPartCategoryId()).orElseThrow(
+        PartCategoryRule category=partCategoryRuleRepository.findByCategory(requestDto.getCategory()).orElseThrow(
                 ()->new PartCategoryNotFoundException("Category not found")
         );
         part.setPartCategoryRule(category);
         partRepository.save(part);
+        return "Part added successful";
+    }
+
+    @Transactional
+    public String addAddOns(AddOnRequestDto requestDto){
+        if(addOnRepository.existsByName(requestDto.getAddOnName())){
+            throw new DuplicateAddOnException("AddOn with name:"+requestDto.getAddOnName()+" " +
+                    "already exists");
+        }
+        AddOn addOn=new AddOn();
+        addOn.setName(requestDto.getAddOnName());
+        addOn.setCurrentPrice(requestDto.getCurrentPrice());
+        addOnRepository.save(addOn);
         return "Part added successful";
     }
 
@@ -83,7 +95,8 @@ public class PricingService implements com.finalProject.service.PricingService {
 
     public List<VariantPriceDto> getVariants(Long bikeConfigId){
         List<VariantPriceDto> result = new ArrayList<>();
-        List<Variant> variants= variantRepository.findByBikeConfigurationId(bikeConfigId);
+        List<Variant> variants= variantRepository.findByBikeConfigurationIdAndStatus(bikeConfigId,
+                VariantStatus.ACTIVE);
         for(Variant variant : variants){
             VariantPriceDto dto=new VariantPriceDto();
             dto.setVariantName(variant.getName());
@@ -157,6 +170,35 @@ public class PricingService implements com.finalProject.service.PricingService {
             }
         }
         return new BulkUpdateResponseDto(successIds,failures);
+    }
+
+    public List<PartResponseDto> getAllParts() {
+
+        List<Part> parts = partRepository.findAll();
+        List<PartResponseDto> response = new ArrayList<>();
+
+        for (Part part : parts) {
+            PartResponseDto dto = new PartResponseDto();
+            dto.setId(part.getId());
+            dto.setPartName(part.getName());
+            response.add(dto);
+        }
+        return response;
+    }
+
+    public List<AddOnDropdownResponseDto> getAllAddOns() {
+
+        List<AddOn> addOns = addOnRepository.findAll();
+
+        List<AddOnDropdownResponseDto> response = new ArrayList<>();
+
+        for (AddOn addOn : addOns) {
+            AddOnDropdownResponseDto dto = new AddOnDropdownResponseDto();
+            dto.setId(addOn.getId());
+            dto.setName(addOn.getName());
+            response.add(dto);
+        }
+        return response;
     }
 
     @Transactional

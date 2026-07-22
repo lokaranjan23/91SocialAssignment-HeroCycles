@@ -14,8 +14,9 @@ public class PartCategoryRule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false, unique = true)
-    private String category;
+    private PartCategory category;
 
     @Column(name = "default_quantity", nullable = false)
     private Integer defaultQuantity;
@@ -28,11 +29,11 @@ public class PartCategoryRule {
         this.id = id;
     }
 
-    public String getCategory() {
+    public PartCategory getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(PartCategory category) {
         this.category = category;
     }
 

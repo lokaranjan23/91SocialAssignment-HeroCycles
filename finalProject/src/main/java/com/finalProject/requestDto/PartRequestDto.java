@@ -1,8 +1,10 @@
 package com.finalProject.requestDto;
 
+import com.finalProject.enums.PartCategory;
+
 public class PartRequestDto {
     private String partName;
-    private Long partCategoryId;
+    private PartCategory category;
     private Float currentPrice;
 
     public String getPartName() {
@@ -13,12 +15,12 @@ public class PartRequestDto {
         this.partName = partName;
     }
 
-    public Long getPartCategoryId() {
-        return partCategoryId;
+    public PartCategory getCategory() {
+        return category;
     }
 
-    public void setPartCategoryId(Long partCategoryId) {
-        this.partCategoryId = partCategoryId;
+    public void setCategory(PartCategory category) {
+        this.category = category;
     }
 
     public Float getCurrentPrice() {

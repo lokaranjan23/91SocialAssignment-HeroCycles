@@ -3,7 +3,14 @@ package com.finalProject.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="configuration_add_ons")
+@Table(
+        name = "configuration_add_on",
+        uniqueConstraints = {@UniqueConstraint(
+                        name = "uk_configuration_addon",
+                        columnNames = {"configuration_id", "addon_id"}
+                )
+        }
+)
 public class ConfigurationAddOn {
 
     @Id

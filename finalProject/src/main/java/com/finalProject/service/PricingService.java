@@ -19,4 +19,6 @@ public interface PricingService {
     BulkUpdateResponseDto updateAddOnPrices(BulkUpdateAddOnRequestDto requestDto);
     void updateEffectivePrices();
     void updateEffectiveAddOnPrices();
+    List<PartResponseDto> getAllParts();
+    List<AddOnDropdownResponseDto> getAllAddOns();
 }

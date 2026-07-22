@@ -95,4 +95,95 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(error);
     }
+
+    @ExceptionHandler(DuplicateVariantException.class)
+    public ResponseEntity<ErrorResponse> duplicateVariantException(DuplicateVariantException ex, HttpServletRequest request){
+        log.error("Error occurred: {}", ex.getMessage(), ex);
+        ErrorResponse error = new ErrorResponse(
+                HttpStatus.CONFLICT.value(),
+                "VARIANT_ALREADY_EXISTS",
+                ex.getMessage(),
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(error);
+    }
+
+    @ExceptionHandler(DuplicateAddOnException.class)
+    public ResponseEntity<ErrorResponse> duplicateAddOnException(DuplicateAddOnException ex, HttpServletRequest request){
+        log.error("Error occurred: {}", ex.getMessage(), ex);
+        ErrorResponse error = new ErrorResponse(
+                HttpStatus.CONFLICT.value(),
+                "ADDON_ALREADY_EXISTS",
+                ex.getMessage(),
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(error);
+    }
+
+    @ExceptionHandler(BikeConfigurationNotFoundException.class)
+    public ResponseEntity<ErrorResponse> bikeConfigurationNotFoundException(
+            BikeConfigurationNotFoundException ex, HttpServletRequest request){
+        log.error("Error occurred: {}", ex.getMessage(), ex);
+        ErrorResponse error = new ErrorResponse(
+                HttpStatus.CONFLICT.value(),
+                "BIKE_CONFIGURATION_NOT_FOUND",
+                ex.getMessage(),
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(error);
+    }
+
+    @ExceptionHandler(AddOnNotFoundException.class)
+    public ResponseEntity<ErrorResponse> addOnNotFoundException(
+            AddOnNotFoundException ex, HttpServletRequest request){
+        log.error("Error occurred: {}", ex.getMessage(), ex);
+        ErrorResponse error = new ErrorResponse(
+                HttpStatus.CONFLICT.value(),
+                "ADDON_NOT_FOUND",
+                ex.getMessage(),
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(error);
+    }
+
+    @ExceptionHandler(DuplicateConfigurationAddOnException.class)
+    public ResponseEntity<ErrorResponse> duplicateConfigurationAddOnException(
+            AddOnNotFoundException ex, HttpServletRequest request){
+        log.error("Error occurred: {}", ex.getMessage(), ex);
+        ErrorResponse error = new ErrorResponse(
+                HttpStatus.CONFLICT.value(),
+                "ADDON_FOR_CONFIGURATION_ALREADY_EXISTS",
+                ex.getMessage(),
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(error);
+    }
+
+    @ExceptionHandler(DuplicateBikeConfigurationException.class)
+    public ResponseEntity<ErrorResponse> duplicateBikeConfigurationException(
+            AddOnNotFoundException ex, HttpServletRequest request){
+        log.error("Error occurred: {}", ex.getMessage(), ex);
+        ErrorResponse error = new ErrorResponse(
+                HttpStatus.CONFLICT.value(),
+                "BIKE_CONFIGURATION_ALREADY_EXISTS",
+                ex.getMessage(),
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(error);
+    }
+
+
+
 }
