@@ -1,6 +1,5 @@
 package com.finalProject.entity;
 import com.finalProject.enums.Status;
-import com.finalProject.exception.InvalidDataEnteredException;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;

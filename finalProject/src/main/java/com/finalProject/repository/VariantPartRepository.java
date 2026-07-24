@@ -1,6 +1,5 @@
 package com.finalProject.repository;
 
-import com.finalProject.entity.Variant;
 import com.finalProject.entity.VariantPart;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

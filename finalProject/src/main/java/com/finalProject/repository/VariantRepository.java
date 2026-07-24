@@ -13,7 +13,6 @@ import java.util.Optional;
 
 @Repository
 public interface VariantRepository extends JpaRepository<Variant, Long> {
-    List<Variant> findByIdIn(List<Long> variantIds);
 
     List<Variant> findByBikeConfigurationIdAndStatus(Long bikeConfigId, 
                                                      VariantStatus status);

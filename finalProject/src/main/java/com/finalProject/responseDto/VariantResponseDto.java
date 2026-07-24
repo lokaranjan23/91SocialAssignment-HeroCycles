@@ -1,6 +1,5 @@
 package com.finalProject.responseDto;
 
-import com.finalProject.enums.Status;
 import com.finalProject.enums.VariantStatus;
 
 public class VariantResponseDto {

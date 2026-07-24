@@ -1,7 +1,6 @@
 package com.finalProject.service.impl;
 
 import com.finalProject.entity.*;
-import com.finalProject.enums.PartCategory;
 import com.finalProject.enums.Status;
 import com.finalProject.enums.VariantStatus;
 import com.finalProject.exception.*;

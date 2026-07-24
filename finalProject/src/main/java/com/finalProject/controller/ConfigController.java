@@ -1,6 +1,5 @@
 package com.finalProject.controller;
 
-import com.finalProject.enums.PartCategory;
 import com.finalProject.requestDto.BikeConfigurationRequestDto;
 import com.finalProject.requestDto.ConfigureAddOnsRequestDto;
 import com.finalProject.requestDto.CreateVariantRequestDto;
@@ -22,7 +21,7 @@ public class ConfigController {
 
     private final ConfigService configService;
 
-    public ConfigController(ConfigService configService, LookupService lookupService) {
+    public ConfigController(ConfigService configService) {
         this.configService = configService;
     }
 

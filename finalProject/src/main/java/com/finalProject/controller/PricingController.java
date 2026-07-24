@@ -18,7 +18,7 @@ import java.util.List;
 public class PricingController {
     private final PricingService pricingService;
 
-    public PricingController(PricingService pricingService, LookupService lookupService) {
+    public PricingController(PricingService pricingService) {
         this.pricingService = pricingService;
     }
 

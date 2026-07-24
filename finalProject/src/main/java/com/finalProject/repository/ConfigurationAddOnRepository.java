@@ -1,6 +1,5 @@
 package com.finalProject.repository;
 
-import com.finalProject.entity.AddOn;
 import com.finalProject.entity.ConfigurationAddOn;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
