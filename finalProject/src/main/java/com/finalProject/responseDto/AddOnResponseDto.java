@@ -6,15 +6,15 @@ import java.util.List;
 
 public class AddOnResponseDto {
 
-        List<AddOn> addons;
+        List<SelectedAddOnResponseDto> addons;
 
         Float totalPrice;
 
-    public List<AddOn> getAddons() {
+    public List<SelectedAddOnResponseDto> getAddons() {
         return addons;
     }
 
-    public void setAddons(List<AddOn> addons) {
+    public void setAddons(List<SelectedAddOnResponseDto> addons) {
         this.addons = addons;
     }
 

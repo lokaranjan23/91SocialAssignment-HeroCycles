@@ -1,5 +1,6 @@
 package com.finalProject.entity;
 
+import com.finalProject.enums.Status;
 import com.finalProject.exception.InvalidDataEnteredException;
 import jakarta.persistence.*;
 
@@ -14,6 +15,10 @@ public class AddOn {
 
     @Column(name = "name", unique = true)
     private String name;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Status status;
 
     @Column(name = "current_price",nullable = false)
     private Float currentPrice;
@@ -50,6 +55,7 @@ public class AddOn {
     }
 
     public void setNewPrice(Float newPrice) {
+
         this.newPrice = newPrice;
     }
 
@@ -58,10 +64,19 @@ public class AddOn {
     }
 
     public void setEffectiveFrom(LocalDate effectiveFrom) {
+
         this.effectiveFrom = effectiveFrom;
     }
 
     public Float getCurrentPrice() {
         return currentPrice;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

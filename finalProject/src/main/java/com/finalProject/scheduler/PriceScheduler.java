@@ -13,8 +13,9 @@ public class PriceScheduler {
         this.pricingService = pricingService;
     }
 
-    @Scheduled(cron = "0 0 0 * * *")
+    @Scheduled(cron = "0 * * * * *")
     public void updateEffectivePrices() {
+        System.out.println("Scheduler running");
         pricingService.updateEffectivePrices();
         pricingService.updateEffectiveAddOnPrices();
     }

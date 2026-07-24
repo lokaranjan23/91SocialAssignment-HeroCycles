@@ -15,4 +15,14 @@ public interface VariantPartRepository extends JpaRepository<VariantPart, Long> 
 
     @Query("SELECT DISTINCT vp.variantId FROM VariantPart vp WHERE vp.partId IN :partIds")
     List<Long> findDistinctVariantIdsByPartIdIn(@Param("partIds") List<Long> partIds);
+
+    @Query("""
+SELECT vp.partId
+FROM VariantPart vp
+WHERE vp.variantId = :variantId
+""")
+    List<Long> findPartIdsByVariantId(@Param("variantId") Long variantId);
+
+    @Query("SELECT DISTINCT vp.variantId FROM VariantPart vp WHERE vp.partId = :partId")
+    List<Long> findDistinctVariantIdsByPartId(@Param("partId") Long partId);
 }

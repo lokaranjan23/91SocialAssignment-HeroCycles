@@ -1,4 +1,6 @@
 package com.finalProject.entity;
+import com.finalProject.enums.Status;
+import com.finalProject.exception.InvalidDataEnteredException;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -19,6 +21,10 @@ public class Part {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "part_category_rule_id", nullable = false)
     private PartCategoryRule partCategoryRule;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Status status;
 
     @Column(name = "current_price",nullable=false)
     private float currentPrice;
@@ -67,6 +73,7 @@ public class Part {
     }
 
     public void setNewPrice(Float newPrice) {
+
         this.newPrice = newPrice;
     }
 
@@ -75,6 +82,15 @@ public class Part {
     }
 
     public void setEffectiveFrom(LocalDate effectiveFrom) {
+
         this.effectiveFrom = effectiveFrom;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }
